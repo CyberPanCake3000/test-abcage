@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('supplies', function (Blueprint $table) {
-            //
+            $table->date('supply_date')->default(\Carbon\Carbon::parse('2021-01-01'));
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('supplies', function (Blueprint $table) {
-            //
+            $table->dropColumn('supply_date');
         });
     }
 };

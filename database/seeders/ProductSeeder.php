@@ -16,15 +16,15 @@ class ProductSeeder extends Seeder
         $products = [
             [
                 'name' => 'Колбаса',
-                'amount' => 300,
+                'amount' => 0,
             ],
             [
                 'name' => 'Пармезан',
-                'amount' => 100,
+                'amount' => 0,
             ],
             [
                 'name' => 'Левый носок',
-                'amount' => 250,
+                'amount' => 0,
             ],
         ];
 

@@ -9,8 +9,14 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function getCurrentPrice($date)
+    protected $fillable = ['name', 'amount'];
+    public function getCurrentPriceAttribute()
     {
-        return 0;
+        return 100;
+    }
+
+    public function getAmountAttribute()
+    {
+        return 10;
     }
 }

@@ -29,7 +29,7 @@
                             {{ $product->amount }}
                         </div>
                         <div class="col-4">
-                            {{ $product->getCurrentPrice($date) }}
+                            {{ $product->current_price }}
                         </div>
                     </div>
                 @endforeach
