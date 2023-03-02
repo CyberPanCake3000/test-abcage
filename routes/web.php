@@ -16,4 +16,4 @@ use App\Http\Controllers\PagesController;
 
 Route::get('/', [PagesController::class, 'index']);
 
-Route::post('/getproducts', [PagesController::class, 'getProductsByDate'])->name('getProductsByDate');
+Route::post('/getProductsByDate', [PagesController::class, 'getProductsByDate'])->name('getProductsByDate');
