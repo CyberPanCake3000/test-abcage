@@ -11,16 +11,4 @@ class Product extends Model
 
     protected $fillable = ['name', 'amount'];
 
-    public function getCurrentPriceAttribute()
-    {
-        return 100;
-    }
-
-    public function getAmount($date)
-    {
-        $suppliesAmount = $this->hasMany(Supply::class, 'product_id')->whereDate('supply_date', '=', $date)->sum('amount');
-        $preordersAmount = $this->hasMany(Preorder::class, 'product_id')->whereDate('preorder_date', '=', $date)->sum('amount');
-        $amount = $suppliesAmount - $preordersAmount;
-        return $amount;
-    }
 }
