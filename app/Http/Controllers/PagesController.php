@@ -17,7 +17,7 @@ class PagesController extends Controller
         return view('index', ['stocks' => $stocks, 'date' => $date]);
     }
 
-    public function getProductsByDate(Request $request)
+    public function getProducts(Request $request)
     {
         $date = $request->get('date');
         $stocks = Stock::where('stock_date', $date)->get();

@@ -10,7 +10,7 @@ class Stock extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['cost_price' ,'amount', 'stock_date'];
+    protected $fillable = ['selling_price' ,'amount', 'stock_date', 'product_id'];
 
     public function getProduct()
     {

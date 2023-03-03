@@ -7,7 +7,7 @@
     <div class="py-3">
         Для просмотра цен на товары в заданный день выберите дату и нажмите "Поиск"
     </div>
-    <form class="d-flex" action="{{ route('getProductsByDate') }}" method="POST">
+    <form class="d-flex" action="{{ route('getProducts') }}" method="POST">
         @csrf
         <div class="col-2 me-2">
             <input class="form-control" name="date" type="date" value="{{ $date }}" aria-label="Выберите дату"/>

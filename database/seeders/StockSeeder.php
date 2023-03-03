@@ -20,25 +20,39 @@ class StockSeeder extends Seeder
         for ($product = 1; $product <= 3; $product++)
         {
             $result = [];
+            $amount = 0;
+            $suppliesPriceSum = 0;
+            $suppliesPriceAvg = 0;
 
             foreach($period as $date)
             {
-                $supplies = Supply::where('product_id', '=', $product)->whereDate('supply_date', '<=', $date);
-                $preorders = Preorder::where('product_id', '=', $product)->whereDate('preorder_date', '<=', $date);
+                $supplies = Supply::where('product_id', '=', $product);
+                $suppliesAmount = $supplies->whereDate('supply_date', '=', $date)->sum('amount');
+                $suppliesAmountAll = $supplies->whereDate('supply_date', '<=', $date)->sum('amount');
 
-                $amount = $supplies->sum('amount') - $preorders->sum('amount');
+                $suppliesPriceAvg += $supplies->whereDate('supply_date', '<=', $date)->avg('price');
+                $suppliesPriceSum += $supplies->whereDate('supply_date', '<=', $date)->sum('price');
 
-                if($amount <= 0)
+                if($suppliesAmountAll == 0)
                 {
+                    $price = 0;
+                } else {
+                    $price = $suppliesPriceAvg / $suppliesAmountAll;
+                }
+
+                $preorders = Preorder::where('product_id', '=', $product)->whereDate('preorder_date', '=', $date);
+                $preordersAmount = $preorders->sum('amount');
+
+                $amount = $amount + $suppliesAmount - $preordersAmount;
+
+                if($amount < 0) {
                     continue;
                 }
 
-                if($supplies->sum('amount') == 0)
-                {
-                    $price = $supplies->avg('price');
-                } else {
-                    $price = $supplies->sum('price') + $supplies->sum('price') * 0.3 / $supplies->sum('amount');
+                if($amount != 0){
+                    $price = ($suppliesPriceSum + $suppliesPriceSum * 0.3) / $amount;
                 }
+
 
                 $result = [
                     'product_id' => $product,
